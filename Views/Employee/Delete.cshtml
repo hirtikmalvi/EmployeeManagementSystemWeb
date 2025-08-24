@@ -1,0 +1,43 @@
+﻿@using EmployeeManagementSystemWeb.DTOs.Employees;
+@using EmployeeManagementSystemWeb.Utilities;
+
+@model DisplayEmployeeDTO
+@{
+    ViewData["Title"] = "Delete";
+}
+
+<div>
+    <h1 class="text-center">Delete Employee</h1>
+    <h4 class="text-danger text-center">Do you really want to delete? This action cannot be reverted.</h4>
+    <div style="max-width:400px" class="container">
+        <form method="post" asp-controller="Employee" asp-action="Delete" class="border rounded-2 px-3">
+            <input asp-for="EmpID" hidden />
+            <div class="mt-3">
+                <label asp-for="EmpName" class="form-label"></label>
+                <input asp-for="EmpName" class="form-control" placeholder="Enter Employee Name" disabled/>
+            </div>
+            <div class="mt-1">
+                <label asp-for="Department" class="form-label"></label>
+                <input asp-for="Department" class="form-control" placeholder="Enter Department" disabled/>
+            </div>
+            <div class="mt-1">
+                <label asp-for="Salary" class="form-label"></label>
+                <input asp-for="Salary" class="form-control" type="number" placeholder="Enter Salary" disabled />
+            </div>
+            <div class="mt-1">
+                <label asp-for="JoiningDate" class="form-label"></label>
+                <input asp-for="JoiningDate" class="form-control" type="date" disabled />
+            </div>
+            <div class="my-4 d-flex gap-2">
+                <button type="submit" class="btn btn-danger">Delete</button>
+                <a class="btn btn-secondary" asp-controller="Employee" asp-action="Index">Go to Employee List</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts{
+    @{ 
+        <partial name="_ValidationScriptsPartial" />
+    }
+}

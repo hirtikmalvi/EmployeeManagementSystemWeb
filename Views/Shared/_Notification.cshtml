@@ -1,0 +1,51 @@
+﻿@if (TempData["success"] != null)
+{
+    <div id="successToast"
+         class="toast align-items-center bg-success border-0 position-fixed top-0 end-0 m-3"
+         role="alert" aria-live="assertive" aria-atomic="true" data-bs-autohide="true" data-bs-delay="3500">
+        <div class="d-flex">
+            <div class="toast-body text-light text-end d-flex align-items-center">
+                <span><i class="bi bi-check2 fs-4"></i></span>
+                &nbsp;
+                <span class="fs-6">@TempData["success"]</span>
+            </div>
+            <button type="button" class="btn-close btn-close-white me-2 m-auto"
+                    data-bs-dismiss="toast" aria-label="Close">
+            </button>
+        </div>
+    </div>
+}
+@if (TempData["error"] != null)
+{
+    <div id="errorToast"
+         class="toast align-items-center bg-danger border-0 position-fixed top-0 end-0 m-3"
+         role="alert" aria-live="assertive" aria-atomic="true" data-bs-autohide="true" data-bs-delay="3500">
+        <div class="d-flex">
+            <div class="toast-body text-light text-end d-flex align-items-center">
+                <span>
+                    <i class="bi bi-x-lg fs-4"></i>
+                </span>
+                &nbsp;
+                <span class="fs-4">@TempData["error"]</span>
+            </div>
+            <button type="button" class="btn-close btn-close-white me-2 m-auto"
+                    data-bs-dismiss="toast" aria-label="Close">
+            </button>
+        </div>
+    </div>
+}
+
+<script>
+    document.addEventListener("DOMContentLoaded", function(){
+        var successToast = document.getElementById
+        ("successToast");
+        var errorToast = document.getElementById
+        ("errorToast");
+        if(successToast){
+            new bootstrap.Toast(successToast).show();
+        }
+        else{
+            new bootstrap.Toast(errorToast).show();
+        }
+    });
+</script>

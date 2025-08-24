@@ -1,0 +1,89 @@
+﻿@using EmployeeManagementSystemWeb.DTOs.Employees
+@using EmployeeManagementSystemWeb.Utilities
+
+@model CustomResult<List<DisplayEmployeeDTO>>
+@{
+    ViewData["Title"] = "Employees";
+}
+
+<div class="container">
+    <div class="row align-items-center my-3">
+        <div class="col-6">
+            <h1 class="h3">Employees List</h1>
+        </div>
+        <div class="col-6 text-sm-end text-end mb-2">
+            <a asp-controller="Employee" asp-action="Create" class="btn btn-primary">Add Employee</a>
+        </div>
+    </div>
+
+    <div class="row mb-3">
+        <div class="col-12">
+            <form method="get" asp-controller="Employee" asp-action="Index" class="row g-2">
+                <div class="col-sm-6 col-md-4">
+                    <label for="searchBox" class="form-label">Search</label>
+                    <input class="form-control"
+                           name="searchValue" id="searchBox" placeholder="Enter Keywords" />
+                </div>
+                <div class="col-sm-6 col-md-4 align-self-end">
+                    <div>
+                        <span class="me-2">Search By:</span>
+                        <input type="radio" id="empname-radio-btn" value="EmpName" name="searchBy" checked />
+                        <label for="empname-radio-btn" class="me-2">EmpName</label>
+                        <input type="radio" id="department-radio-btn" value="Department" name="searchBy" />
+                        <label for="department-radio-btn">Department</label>
+                    </div>
+                </div>
+                <div class="col-sm-12 col-md-4 align-self-end">
+                    <button type="submit" class="btn btn-primary w-100">Search</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    @if (Model.Success)
+    {
+        <div class="table-responsive">
+            <table class="table table-bordered table-striped text-center align-middle">
+                <thead>
+                    <tr>
+                        <th>EmpID</th>
+                        <th>EmpName</th>
+                        <th>Department</th>
+                        <th>Salary (₹)</th>
+                        <th>JoiningDate</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var employee in Model.Data!)
+                    {
+                        <tr id="employee-@employee.EmpID">
+                            <td>@employee.EmpID</td>
+                            <td>@employee.EmpName</td>
+                            <td>@employee.Department</td>
+                            <td>@employee.Salary</td>
+                            <td>@employee.JoiningDate.ToShortDateString()</td>
+                            <td>
+                                <div class="d-flex flex-wrap justify-content-center gap-2">
+                                    <a asp-controller="Employee" asp-action="Update"
+                                       asp-route-id="@employee.EmpID" class="btn btn-sm btn-secondary">
+                                        Edit
+                                    </a>
+                                    <a asp-controller="Employee" asp-action="Delete" asp-route-id="@employee.EmpID" class="btn btn-sm btn-danger">
+                                        Delete
+                                    </a>
+                                </div>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    }
+    else
+    {
+        <div class="alert alert-warning fs-5 text-center">
+            @Model.Message
+        </div>
+    }
+</div>
