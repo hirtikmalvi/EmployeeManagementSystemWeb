@@ -21,7 +21,7 @@ Open the `.sln` file in **Visual Studio** (or Visual Studio Code with C# extensi
 
 ### 3️⃣ Restore dependencies
 
-Run the following command (or let Visual Studio restore automatically):
+Run the following command:
 
 ```bash
 dotnet restore
